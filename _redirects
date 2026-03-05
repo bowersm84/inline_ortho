@@ -1,0 +1,26 @@
+# inLine Orthodontics — 301 Redirect Map
+# Old Sesame URLs → New Amplify URLs
+# Format: old-path new-path status-code
+
+/home                       /                                   301
+/meet-dr-justin-darley      /about/dr-darley.html               301
+/meet-the-team              /about/team.html                    301
+/what-sets-us-apart         /about/what-sets-us-apart.html      301
+/office-visits              /patients/first-visit.html          301
+/financial-information      /patients/financial.html            301
+/before-and-after           /patients/before-after.html         301
+/patient-forms              /patients/forms.html                301
+/life-with-braces           /patients/life-with-braces.html     301
+/brushing-and-flossing      /patients/brushing-flossing.html    301
+/for-all-ages               /patients/for-all-ages.html         301
+/types-of-braces            /treatments/types-of-braces.html    301
+/types-of-appliances        /patients/appliances.html           301
+/color-my-braces            /patients/color-my-braces.html      301
+/early-orthodontic-treatment /treatments/early-treatment.html   301
+/two-phase-treatment        /treatments/two-phase.html          301
+/invisalign-treatment       /treatments/angel-aligners.html     301
+/itero-element              /treatments/itero.html              301
+/dentofacial-orthopedics    /treatments/dentofacial.html        301
+/impacted-canines           /treatments/impacted-canines.html   301
+/ocala-office               /contact/office.html                301
+/appointment-request        /contact/appointment.html           301
