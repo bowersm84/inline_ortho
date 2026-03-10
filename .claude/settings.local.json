@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -oP 'footer__logo.{0,80}' first-visit.html)"
+    ]
+  }
+}

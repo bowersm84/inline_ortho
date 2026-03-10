@@ -9,7 +9,7 @@
 @media (max-width: 1024px) {
   :root {
     --section-padding: 3.5rem;
-    --header-height: 70px;
+    --header-height: 90px;
   }
 
   .grid--3 {
@@ -145,7 +145,7 @@
 @media (max-width: 640px) {
   :root {
     --section-padding: 3rem;
-    --header-height: 64px;
+    --header-height: 80px;
   }
 
   .container {
@@ -167,7 +167,7 @@
   }
 
   .header__logo img {
-    height: 44px;
+    height: 60px;
   }
 
   .hero {

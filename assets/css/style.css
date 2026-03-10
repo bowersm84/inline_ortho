@@ -58,7 +58,7 @@
   --container-max: 1200px;
   --container-narrow: 800px;
   --container-wide: 1400px;
-  --header-height: 80px;
+  --header-height: 100px;
   
   /* Radius */
   --radius-sm: 4px;
@@ -293,7 +293,7 @@ p:last-child {
 }
 
 .header__logo img {
-  height: 56px;
+  height: 80px;
   width: auto;
 }
 
@@ -659,9 +659,13 @@ p:last-child {
 }
 
 .footer__logo {
-  height: 56px;
+  height: 90px;
   width: auto;
+  display: block;
   margin-bottom: var(--space-lg);
+  background-color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 8px;
 }
 
 .footer__tagline {
