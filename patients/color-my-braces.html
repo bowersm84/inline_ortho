@@ -15,16 +15,109 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXB0T5QNHH"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VXB0T5QNHH');</script>
   <style>
-    .cmb-container { text-align: center; max-width: 700px; margin: 0 auto; }
-    .cmb-colors { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: var(--space-xl); }
-    .cmb-color { width: 36px; height: 36px; border-radius: 50%; cursor: pointer; border: 3px solid transparent; transition: all var(--transition-fast); }
-    .cmb-color:hover, .cmb-color.active { transform: scale(1.2); border-color: var(--color-heading); box-shadow: var(--shadow-md); }
-    .cmb-teeth { display: flex; justify-content: center; gap: 4px; flex-wrap: wrap; margin-bottom: var(--space-xl); }
-    .cmb-tooth { width: 40px; height: 50px; background: #f0f0f0; border: 2px solid #ddd; border-radius: 6px 6px 12px 12px; cursor: pointer; position: relative; transition: all var(--transition-fast); display: flex; align-items: center; justify-content: center; }
-    .cmb-tooth:hover { transform: scale(1.05); }
-    .cmb-bracket { width: 14px; height: 14px; background: #ccc; border-radius: 3px; border: 1px solid #bbb; transition: background var(--transition-fast); }
-    .cmb-actions { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; }
-    @media (max-width: 480px) { .cmb-tooth { width: 32px; height: 42px; } .cmb-bracket { width: 11px; height: 11px; } .cmb-color { width: 30px; height: 30px; } }
+    .cmb-container { text-align: center; max-width: 800px; margin: 0 auto; }
+
+    .cmb-smile {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto var(--space-xl);
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    .cmb-arch {
+      display: flex;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+    }
+
+    .cmb-arch--lower {
+      margin-bottom: 0;
+      margin-top: var(--space-sm);
+    }
+
+    .cmb-arch-label {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cmb-tooth {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0 2px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .cmb-tooth:hover {
+      transform: scale(1.08);
+    }
+
+    .cmb-tooth svg {
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+    }
+
+    .cmb-bracket-dot {
+      transition: fill 0.15s ease;
+    }
+
+    .cmb-colors {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: var(--space-xl);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cmb-color {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.15s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+
+    .cmb-color:hover, .cmb-color.active {
+      transform: scale(1.2);
+      border-color: var(--color-heading);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .cmb-actions {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+      margin-top: var(--space-xl);
+    }
+
+    .cmb-divider {
+      width: 80%;
+      max-width: 400px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+      margin: var(--space-xs) auto;
+    }
+
+    @media (max-width: 480px) {
+      .cmb-tooth { margin: 0 1px; }
+      .cmb-tooth svg { width: 28px; height: auto; }
+      .cmb-color { width: 32px; height: 32px; }
+      .cmb-smile { padding: var(--space-xl) var(--space-sm); }
+    }
   </style>
 </head>
 <body>
@@ -47,22 +140,29 @@
       <div class="container">
         <div class="cmb-container">
           <div class="fade-in">
-            <p class="lead" style="margin-bottom: var(--space-md);">Pick your colors and click on a tooth to paint it!</p>
-            <p style="color: var(--color-text-light); font-size: var(--font-size-sm); margin-bottom: var(--space-2xl);">Click a color below, then click each tooth to apply. Check with Dr. Darley to see which fun colors are available!</p>
+            <p class="lead" style="margin-bottom: var(--space-sm);">Design your perfect smile!</p>
+            <p style="color: var(--color-text-light); font-size: var(--font-size-sm); margin-bottom: var(--space-2xl);">Pick a color below, then click on any bracket to paint it. Check with Dr. Darley to see which fun colors are available!</p>
           </div>
 
           <!-- Color palette -->
-          <div class="cmb-colors" id="colorPalette">
-            <div class="cmb-color" data-color="#FF0000" style="background-color:#FF0000;" title="#FF0000"></div><div class="cmb-color" data-color="#FF4444" style="background-color:#FF4444;" title="#FF4444"></div><div class="cmb-color" data-color="#FF6B6B" style="background-color:#FF6B6B;" title="#FF6B6B"></div><div class="cmb-color" data-color="#FF8C00" style="background-color:#FF8C00;" title="#FF8C00"></div><div class="cmb-color" data-color="#FFA500" style="background-color:#FFA500;" title="#FFA500"></div><div class="cmb-color" data-color="#FFD700" style="background-color:#FFD700;" title="#FFD700"></div><div class="cmb-color" data-color="#FFFF00" style="background-color:#FFFF00;" title="#FFFF00"></div><div class="cmb-color" data-color="#ADFF2F" style="background-color:#ADFF2F;" title="#ADFF2F"></div><div class="cmb-color" data-color="#32CD32" style="background-color:#32CD32;" title="#32CD32"></div><div class="cmb-color" data-color="#00AA00" style="background-color:#00AA00;" title="#00AA00"></div><div class="cmb-color" data-color="#006400" style="background-color:#006400;" title="#006400"></div><div class="cmb-color" data-color="#00CED1" style="background-color:#00CED1;" title="#00CED1"></div><div class="cmb-color" data-color="#00BFFF" style="background-color:#00BFFF;" title="#00BFFF"></div><div class="cmb-color" data-color="#1E90FF" style="background-color:#1E90FF;" title="#1E90FF"></div><div class="cmb-color" data-color="#0000FF" style="background-color:#0000FF;" title="#0000FF"></div><div class="cmb-color" data-color="#4B0082" style="background-color:#4B0082;" title="#4B0082"></div><div class="cmb-color" data-color="#8A2BE2" style="background-color:#8A2BE2;" title="#8A2BE2"></div><div class="cmb-color" data-color="#9932CC" style="background-color:#9932CC;" title="#9932CC"></div><div class="cmb-color" data-color="#FF69B4" style="background-color:#FF69B4;" title="#FF69B4"></div><div class="cmb-color" data-color="#FF1493" style="background-color:#FF1493;" title="#FF1493"></div><div class="cmb-color" data-color="#C71585" style="background-color:#C71585;" title="#C71585"></div><div class="cmb-color" data-color="#FFFFFF" style="background-color:#FFFFFF;" title="#FFFFFF"></div><div class="cmb-color" data-color="#C0C0C0" style="background-color:#C0C0C0;" title="#C0C0C0"></div><div class="cmb-color" data-color="#808080" style="background-color:#808080;" title="#808080"></div><div class="cmb-color" data-color="#000000" style="background-color:#000000;" title="#000000"></div>
-          </div>
+          <div class="cmb-colors" id="colorPalette"></div>
 
-          <!-- Teeth row -->
-          <div class="cmb-teeth" id="teethRow"></div>
+          <!-- Teeth SVG area -->
+          <div class="cmb-smile">
+            <p class="cmb-arch-label">Upper Teeth</p>
+            <div class="cmb-arch" id="upperArch"></div>
+            <div class="cmb-divider"></div>
+            <div class="cmb-arch cmb-arch--lower" id="lowerArch"></div>
+            <p class="cmb-arch-label" style="margin-top: var(--space-sm);">Lower Teeth</p>
+          </div>
 
           <!-- Action buttons -->
           <div class="cmb-actions">
-            <button class="btn btn--outline btn--sm" id="colorAll">Color All Teeth</button>
-            <button class="btn btn--outline btn--sm" id="alternateColors">Alternate Colors</button>
+            <button class="btn btn--primary btn--sm" id="colorAllUpper">Color Upper</button>
+            <button class="btn btn--primary btn--sm" id="colorAllLower">Color Lower</button>
+            <button class="btn btn--outline btn--sm" id="colorAll">Color All</button>
+            <button class="btn btn--outline btn--sm" id="alternateColors">Alternate</button>
+            <button class="btn btn--outline btn--sm" id="randomColors">Random</button>
             <button class="btn btn--outline btn--sm" id="resetTeeth">Reset</button>
           </div>
         </div>
@@ -77,50 +177,146 @@
   <script src="/assets/js/main.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const teethRow = document.getElementById('teethRow');
-    const palette = document.getElementById('colorPalette');
+    const colors = [
+      '#FF0000','#FF4444','#FF6B6B','#FF8C00','#FFA500','#FFD700',
+      '#FFFF00','#ADFF2F','#32CD32','#00AA00','#006400','#00CED1',
+      '#00BFFF','#1E90FF','#0000FF','#4B0082','#8A2BE2','#9932CC',
+      '#FF69B4','#FF1493','#C71585','#FFFFFF','#C0C0C0','#808080','#000000'
+    ];
+
     let selectedColor = '#FF0000';
-    const numTeeth = 14;
+    const palette = document.getElementById('colorPalette');
+    const defaultBracketColor = '#B0B0B0';
 
-    // Create teeth
-    for (let i = 0; i < numTeeth; i++) {
-      const tooth = document.createElement('div');
-      tooth.className = 'cmb-tooth';
-      tooth.innerHTML = '<div class="cmb-bracket"></div>';
-      tooth.addEventListener('click', () => {
-        tooth.querySelector('.cmb-bracket').style.backgroundColor = selectedColor;
-      });
-      teethRow.appendChild(tooth);
-    }
-
-    // Color selection
-    palette.querySelectorAll('.cmb-color').forEach(swatch => {
+    // Build color palette
+    colors.forEach((c, i) => {
+      const swatch = document.createElement('div');
+      swatch.className = 'cmb-color' + (i === 0 ? ' active' : '');
+      swatch.style.backgroundColor = c;
+      swatch.dataset.color = c;
+      if (c === '#FFFFFF') swatch.style.border = '3px solid #ddd';
       swatch.addEventListener('click', () => {
         palette.querySelectorAll('.cmb-color').forEach(s => s.classList.remove('active'));
         swatch.classList.add('active');
-        selectedColor = swatch.dataset.color;
+        selectedColor = c;
       });
+      palette.appendChild(swatch);
     });
-    palette.querySelector('.cmb-color').classList.add('active');
 
-    // Color all
+    // Tooth SVG generator
+    function createTooth(id, width, height, isUpper) {
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', width);
+      svg.setAttribute('height', height);
+      svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
+      svg.style.cursor = 'pointer';
+
+      const tooth = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      tooth.setAttribute('x', 2);
+      tooth.setAttribute('y', isUpper ? 0 : 4);
+      tooth.setAttribute('width', width - 4);
+      tooth.setAttribute('height', height - 4);
+      tooth.setAttribute('rx', isUpper ? '4' : '6');
+      tooth.setAttribute('ry', isUpper ? '4' : '6');
+      tooth.setAttribute('fill', '#F5F0EB');
+      tooth.setAttribute('stroke', '#D4CFC9');
+      tooth.setAttribute('stroke-width', '1.5');
+      svg.appendChild(tooth);
+
+      const wire = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      const wireY = isUpper ? height * 0.55 : height * 0.45;
+      wire.setAttribute('x1', 0);
+      wire.setAttribute('y1', wireY);
+      wire.setAttribute('x2', width);
+      wire.setAttribute('y2', wireY);
+      wire.setAttribute('stroke', '#A0A0A0');
+      wire.setAttribute('stroke-width', '1.5');
+      svg.appendChild(wire);
+
+      const bw = Math.min(14, width * 0.5);
+      const bh = 10;
+      const bx = (width - bw) / 2;
+      const by = wireY - bh / 2;
+
+      const bracket = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+      bracket.setAttribute('x', bx);
+      bracket.setAttribute('y', by);
+      bracket.setAttribute('width', bw);
+      bracket.setAttribute('height', bh);
+      bracket.setAttribute('rx', '2');
+      bracket.setAttribute('ry', '2');
+      bracket.setAttribute('fill', defaultBracketColor);
+      bracket.setAttribute('stroke', '#888');
+      bracket.setAttribute('stroke-width', '0.75');
+      bracket.classList.add('cmb-bracket-dot');
+      bracket.dataset.toothId = id;
+      svg.appendChild(bracket);
+
+      svg.addEventListener('click', () => {
+        bracket.setAttribute('fill', selectedColor);
+      });
+
+      return svg;
+    }
+
+    const upperWidths = [26, 28, 32, 36, 40, 42, 42, 42, 42, 40, 36, 32, 28, 26];
+    const lowerWidths = [24, 26, 30, 34, 38, 40, 40, 40, 40, 38, 34, 30, 26, 24];
+    const toothHeight = 52;
+
+    const upperArch = document.getElementById('upperArch');
+    const lowerArch = document.getElementById('lowerArch');
+
+    upperWidths.forEach((w, i) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'cmb-tooth';
+      wrapper.appendChild(createTooth('upper-' + i, w, toothHeight, true));
+      upperArch.appendChild(wrapper);
+    });
+
+    lowerWidths.forEach((w, i) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'cmb-tooth';
+      wrapper.appendChild(createTooth('lower-' + i, w, toothHeight, false));
+      lowerArch.appendChild(wrapper);
+    });
+
+    function getAllBrackets() {
+      return document.querySelectorAll('.cmb-bracket-dot');
+    }
+    function getUpperBrackets() {
+      return document.querySelectorAll('.cmb-bracket-dot[data-tooth-id^="upper"]');
+    }
+    function getLowerBrackets() {
+      return document.querySelectorAll('.cmb-bracket-dot[data-tooth-id^="lower"]');
+    }
+
     document.getElementById('colorAll').addEventListener('click', () => {
-      teethRow.querySelectorAll('.cmb-bracket').forEach(b => b.style.backgroundColor = selectedColor);
+      getAllBrackets().forEach(b => b.setAttribute('fill', selectedColor));
     });
 
-    // Alternate
+    document.getElementById('colorAllUpper').addEventListener('click', () => {
+      getUpperBrackets().forEach(b => b.setAttribute('fill', selectedColor));
+    });
+
+    document.getElementById('colorAllLower').addEventListener('click', () => {
+      getLowerBrackets().forEach(b => b.setAttribute('fill', selectedColor));
+    });
+
     document.getElementById('alternateColors').addEventListener('click', () => {
-      const actives = [...palette.querySelectorAll('.cmb-color.active')];
-      const c1 = selectedColor;
-      const c2 = palette.querySelector('.cmb-color:not(.active)')?.dataset.color || '#FFFFFF';
-      teethRow.querySelectorAll('.cmb-bracket').forEach((b, i) => {
-        b.style.backgroundColor = i % 2 === 0 ? c1 : c2;
+      const c2 = colors[Math.floor(Math.random() * colors.length)];
+      getAllBrackets().forEach((b, i) => {
+        b.setAttribute('fill', i % 2 === 0 ? selectedColor : c2);
       });
     });
 
-    // Reset
+    document.getElementById('randomColors').addEventListener('click', () => {
+      getAllBrackets().forEach(b => {
+        b.setAttribute('fill', colors[Math.floor(Math.random() * colors.length)]);
+      });
+    });
+
     document.getElementById('resetTeeth').addEventListener('click', () => {
-      teethRow.querySelectorAll('.cmb-bracket').forEach(b => b.style.backgroundColor = '#ccc');
+      getAllBrackets().forEach(b => b.setAttribute('fill', defaultBracketColor));
     });
   });
   </script>
