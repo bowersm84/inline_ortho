@@ -9,115 +9,90 @@
   <meta property="og:type" content="website">
   <title>Color My Braces | inLine Orthodontics | Ocala, FL</title>
   <link rel="canonical" href="https://www.inlineortho.com/patients/color-my-braces.html">
-  <link rel="icon" type="image/png" href="/assets/images/logo/header-logo.png">
+  <link rel="icon" type="image/jpeg" href="/assets/images/logo/inLine_Logo_Office_Favicon.jpg">
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/assets/css/responsive.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXB0T5QNHH"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-VXB0T5QNHH');</script>
   <style>
-    .cmb-container { text-align: center; max-width: 800px; margin: 0 auto; }
+  /* ── Color My Braces Widget ── */
+  .cmb-outer {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2rem 2rem 2.5rem;
+    box-shadow: 0 8px 40px rgba(0,119,204,0.10), 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .cmb-header { text-align: center; margin-bottom: 1.2rem; }
+  .cmb-header p { font-size: 0.88rem; color: var(--color-text-muted, #64748b); margin-top: 0.3rem; }
 
-    .cmb-smile {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto var(--space-xl);
-      background: var(--color-bg-alt);
-      border-radius: var(--radius-xl);
-      padding: var(--space-2xl) var(--space-xl);
-    }
+  .cmb-canvas-wrap {
+    position: relative;
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    cursor: pointer;
+  }
+  #cmbBase    { display: block; width: 100%; height: auto; aspect-ratio: 900 / 599; }
+  #cmbOverlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 
-    .cmb-arch {
-      display: flex;
-      justify-content: center;
-      margin-bottom: var(--space-md);
-    }
+  .cmb-lbl {
+    font-size: 0.70rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.09em;
+    color: var(--color-text-muted, #64748b);
+    margin-bottom: 0.6rem;
+  }
 
-    .cmb-arch--lower {
-      margin-bottom: 0;
-      margin-top: var(--space-sm);
-    }
+  /* Color slots A / B */
+  .cmb-slots { display: flex; gap: 12px; margin: 1.2rem 0 0.5rem; align-items: center; flex-wrap: wrap; }
+  .cmb-slot {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 14px; border-radius: 50px;
+    border: 2px solid var(--color-border, #e2eaf0);
+    cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s;
+    user-select: none;
+  }
+  .cmb-slot.active {
+    border-color: var(--color-primary, #0077cc);
+    box-shadow: 0 0 0 3px rgba(0,119,204,0.15);
+  }
+  .cmb-slot-dot {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: #ddd; border: 2px solid rgba(0,0,0,0.10);
+    transition: background 0.2s; flex-shrink: 0;
+  }
+  .cmb-slot-label { font-size: 0.80rem; font-weight: 600; }
+  .cmb-slots-hint { font-size: 0.78rem; color: var(--color-text-muted, #64748b); margin-left: auto; text-align: right; line-height: 1.3; }
 
-    .cmb-arch-label {
-      font-family: var(--font-heading);
-      font-size: var(--font-size-xs);
-      font-weight: 600;
-      color: var(--color-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: var(--space-sm);
-    }
+  /* Palette */
+  .cmb-palette { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.8rem; }
+  .cmb-swatch {
+    width: 33px; height: 33px; border-radius: 50%;
+    cursor: pointer; border: 3px solid transparent;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.18);
+    position: relative; flex-shrink: 0;
+  }
+  .cmb-swatch:hover { transform: scale(1.2); box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+  .cmb-swatch.active { border-color: #111; transform: scale(1.13); }
+  .cmb-swatch.light  { border-color: #c8d4de; }
+  .cmb-swatch.light.active { border-color: #445; }
+  .cmb-swatch.active::after {
+    content: "✓"; position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 900;
+    color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .cmb-swatch.active.light::after { color: rgba(0,0,0,0.5); text-shadow: none; }
 
-    .cmb-tooth {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 2px;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
+  .cmb-divider { width: 100%; height: 1px; background: var(--color-border, #e2eaf0); margin: 1.2rem 0 0; }
 
-    .cmb-tooth:hover {
-      transform: scale(1.08);
-    }
-
-    .cmb-tooth svg {
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
-    }
-
-    .cmb-bracket-dot {
-      transition: fill 0.15s ease;
-    }
-
-    .cmb-colors {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: var(--space-xl);
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .cmb-color {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 3px solid transparent;
-      transition: all 0.15s ease;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-    }
-
-    .cmb-color:hover, .cmb-color.active {
-      transform: scale(1.2);
-      border-color: var(--color-heading);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-
-    .cmb-actions {
-      display: flex;
-      justify-content: center;
-      gap: var(--space-md);
-      flex-wrap: wrap;
-      margin-top: var(--space-xl);
-    }
-
-    .cmb-divider {
-      width: 80%;
-      max-width: 400px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--color-border), transparent);
-      margin: var(--space-xs) auto;
-    }
-
-    @media (max-width: 480px) {
-      .cmb-tooth { margin: 0 1px; }
-      .cmb-tooth svg { width: 28px; height: auto; }
-      .cmb-color { width: 32px; height: 32px; }
-      .cmb-smile { padding: var(--space-xl) var(--space-sm); }
-    }
+  @media (max-width: 480px) {
+    .cmb-outer { padding: 1.1rem 0.9rem 2rem; }
+    .cmb-swatch { width: 28px; height: 28px; }
+  }
   </style>
 </head>
 <body>
@@ -138,32 +113,64 @@
 
     <section class="section">
       <div class="container">
-        <div class="cmb-container">
-          <div class="fade-in">
-            <p class="lead" style="margin-bottom: var(--space-sm);">Design your perfect smile!</p>
-            <p style="color: var(--color-text-light); font-size: var(--font-size-sm); margin-bottom: var(--space-2xl);">Pick a color below, then click on any bracket to paint it. Check with Dr. Darley to see which fun colors are available!</p>
+        <div style="max-width:680px; margin: 0 auto var(--space-xl); text-align:center;">
+          <p style="font-size:1.05rem; line-height:1.75; color:var(--color-text);">
+            One of the most fun parts of getting braces is picking your colors! Use the interactive tool below to try on different elastic band colors before your next appointment. Choose a color, click individual brackets, or fill an entire arch at once — you can even mix two colors for an alternating pattern. Show your creation to Dr. Darley and the team at your visit!
+          </p>
+        </div>
+        <div class="cmb-outer">
+          <div class="cmb-header">
+            <p>Pick a color slot, choose a color, then click a bracket — or fill a whole arch at once!</p>
           </div>
 
-          <!-- Color palette -->
-          <div class="cmb-colors" id="colorPalette"></div>
-
-          <!-- Teeth SVG area -->
-          <div class="cmb-smile">
-            <p class="cmb-arch-label">Upper Teeth</p>
-            <div class="cmb-arch" id="upperArch"></div>
-            <div class="cmb-divider"></div>
-            <div class="cmb-arch cmb-arch--lower" id="lowerArch"></div>
-            <p class="cmb-arch-label" style="margin-top: var(--space-sm);">Lower Teeth</p>
+          <!-- Canvas -->
+          <div class="cmb-canvas-wrap" id="cmbWrap">
+            <canvas id="cmbBase"></canvas>
+            <canvas id="cmbOverlay"></canvas>
           </div>
 
-          <!-- Action buttons -->
-          <div class="cmb-actions">
-            <button class="btn btn--primary btn--sm" id="colorAllUpper">Color Upper</button>
-            <button class="btn btn--primary btn--sm" id="colorAllLower">Color Lower</button>
-            <button class="btn btn--outline btn--sm" id="colorAll">Color All</button>
-            <button class="btn btn--outline btn--sm" id="alternateColors">Alternate</button>
-            <button class="btn btn--outline btn--sm" id="randomColors">Random</button>
-            <button class="btn btn--outline btn--sm" id="resetTeeth">Reset</button>
+          <!-- Color Slots -->
+          <div class="cmb-slots">
+            <div class="cmb-slot active" id="slotA" onclick="cmbSetSlot('A')">
+              <div class="cmb-slot-dot" id="dotA"></div>
+              <span class="cmb-slot-label">Color A</span>
+            </div>
+            <div class="cmb-slot" id="slotB" onclick="cmbSetSlot('B')">
+              <div class="cmb-slot-dot" id="dotB"></div>
+              <span class="cmb-slot-label">Color B</span>
+            </div>
+            <span class="cmb-slots-hint">Active slot gets<br>the color you pick ↓</span>
+          </div>
+
+          <!-- Palette -->
+          <div class="cmb-lbl" style="margin-top:1rem">Choose a Color</div>
+          <div class="cmb-palette" id="cmbPalette"></div>
+
+          <div class="cmb-divider"></div>
+
+          <!-- Fill buttons -->
+          <div style="margin-top:1rem">
+            <div class="cmb-lbl">Fill Arch with Color A</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <button class="btn btn--primary btn--sm" onclick="cmbFillArch('upper','A')">⬆ Upper Arch</button>
+              <button class="btn btn--primary btn--sm" onclick="cmbFillArch('lower','A')">⬇ Lower Arch</button>
+              <button class="btn btn--outline btn--sm" onclick="cmbFillArch('all','A')">✦ Both Arches</button>
+            </div>
+          </div>
+
+          <!-- Alternate buttons -->
+          <div style="margin-top:1rem">
+            <div class="cmb-lbl">Alternate A &amp; B Colors</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <button class="btn btn--outline btn--sm" onclick="cmbAlternate('upper')">⬆ Alternate Upper</button>
+              <button class="btn btn--outline btn--sm" onclick="cmbAlternate('lower')">⬇ Alternate Lower</button>
+              <button class="btn btn--outline btn--sm" onclick="cmbAlternate('all')">✦ Alternate Both</button>
+            </div>
+          </div>
+
+          <!-- Reset -->
+          <div style="margin-top:1rem">
+            <button class="btn btn--outline btn--sm" onclick="cmbReset()" style="border-color:#dc2626;color:#dc2626;">✕ Reset All</button>
           </div>
         </div>
       </div>
@@ -176,149 +183,263 @@
   <footer class="site-footer" role="contentinfo"><div class="container"><div class="footer__grid"><div class="footer__brand"><img src="/assets/images/logo/inLine_Logo_Office.jpg" alt="inLine Orthodontics" class="footer__logo" loading="lazy"><p class="footer__tagline">We create confident, healthy smiles through customized orthodontic care delivered with precision, compassion, and excellence.</p><div class="footer__social"><a href="https://www.facebook.com/inLineOrtho/" target="_blank" rel="noopener" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.instagram.com/inlineortho" target="_blank" rel="noopener" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a><a href="https://www.tiktok.com/@inlineortho" target="_blank" rel="noopener" aria-label="TikTok"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a></div></div><div><h4 class="footer__heading">Treatments</h4><ul class="footer__links"><li><a href="/treatments/lightforce.html">LightForce Braces</a></li><li><a href="/treatments/angel-aligners.html">Angel Aligners</a></li><li><a href="/treatments/types-of-braces.html">Types of Braces</a></li><li><a href="/treatments/early-treatment.html">Early Treatment</a></li><li><a href="/treatments/itero.html">iTero Element</a></li></ul></div><div><h4 class="footer__heading">For Patients</h4><ul class="footer__links"><li><a href="/patients/first-visit.html">Office Visits</a></li><li><a href="/patients/financial.html">Financial Information</a></li><li><a href="/patients/before-after.html">Before &amp; After</a></li><li><a href="/patients/forms.html">Patient Forms</a></li><li><a href="/patients/faq.html">FAQ</a></li></ul></div><div><h4 class="footer__heading">Contact</h4><div class="footer__contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><a href="https://goo.gl/maps/kpjHGfzxpu7wPrGD6" target="_blank" rel="noopener">7668 SW 60th Ave, Ste 300<br>Ocala, FL 34476</a></div><div class="footer__contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:352-629-7878">(352) 629-7878</a></div><div class="footer__contact-item"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:info@inlineortho.com">info@inlineortho.com</a></div><div class="footer__contact-item" style="flex-direction:column;gap:4px;margin-top:var(--space-md);"><strong style="color:rgba(255,255,255,0.85);font-size:var(--font-size-xs);">Office Hours</strong><span style="font-size:var(--font-size-xs);line-height:1.8;">Mon: 9am – 4pm<br>Tue: 8am – 5pm<br>Wed: 9am – 6pm<br>Thu: 8am – 5pm<br>Fri: Closed</span></div><div class="footer__bilingual">🌐 Se habla Español</div></div></div><div class="footer__bottom"><span>&copy; 2026 inLine Orthodontics. All rights reserved.</span><span>Website by <a href="#">MBR Project Solutions</a></span></div></div></footer>
   <script src="/assets/js/main.js"></script>
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const colors = [
-      '#FF0000','#FF4444','#FF6B6B','#FF8C00','#FFA500','#FFD700',
-      '#FFFF00','#ADFF2F','#32CD32','#00AA00','#006400','#00CED1',
-      '#00BFFF','#1E90FF','#0000FF','#4B0082','#8A2BE2','#9932CC',
-      '#FF69B4','#FF1493','#C71585','#FFFFFF','#C0C0C0','#808080','#000000'
+  (function() {
+    // ── Bracket zones (mapped to 900×599px image) ──────────────────
+    const IMG_W = 900, IMG_H = 599;
+    const UPPER_Y1 = 222, UPPER_Y2 = 272;
+    const LOWER_Y1 = 274, LOWER_Y2 = 300;
+
+    const BRACKETS = [
+      { id:'u0', arch:'upper', x1:283, x2:347 },
+      { id:'u1', arch:'upper', x1:347, x2:387 },
+      { id:'u2', arch:'upper', x1:387, x2:444 },
+      { id:'u3', arch:'upper', x1:444, x2:501 },
+      { id:'u4', arch:'upper', x1:501, x2:541 },
+      { id:'u5', arch:'upper', x1:541, x2:575 },
+      { id:'u6', arch:'upper', x1:575, x2:618 },
+      { id:'l0', arch:'lower', x1:320, x2:373 },
+      { id:'l1', arch:'lower', x1:373, x2:409 },
+      { id:'l2', arch:'lower', x1:409, x2:446 },
+      { id:'l3', arch:'lower', x1:446, x2:485 },
+      { id:'l4', arch:'lower', x1:485, x2:523 },
+      { id:'l5', arch:'lower', x1:523, x2:557 },
+      { id:'l6', arch:'lower', x1:557, x2:598 },
     ];
 
-    let selectedColor = '#FF0000';
-    const palette = document.getElementById('colorPalette');
-    const defaultBracketColor = '#B0B0B0';
+    const UPPER = BRACKETS.filter(b => b.arch === 'upper');
+    const LOWER = BRACKETS.filter(b => b.arch === 'lower');
 
-    // Build color palette
-    colors.forEach((c, i) => {
-      const swatch = document.createElement('div');
-      swatch.className = 'cmb-color' + (i === 0 ? ' active' : '');
-      swatch.style.backgroundColor = c;
-      swatch.dataset.color = c;
-      if (c === '#FFFFFF') swatch.style.border = '3px solid #ddd';
-      swatch.addEventListener('click', () => {
-        palette.querySelectorAll('.cmb-color').forEach(s => s.classList.remove('active'));
-        swatch.classList.add('active');
-        selectedColor = c;
-      });
-      palette.appendChild(swatch);
-    });
-
-    // Tooth SVG generator
-    function createTooth(id, width, height, isUpper) {
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.setAttribute('width', width);
-      svg.setAttribute('height', height);
-      svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
-      svg.style.cursor = 'pointer';
-
-      const tooth = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      tooth.setAttribute('x', 2);
-      tooth.setAttribute('y', isUpper ? 0 : 4);
-      tooth.setAttribute('width', width - 4);
-      tooth.setAttribute('height', height - 4);
-      tooth.setAttribute('rx', isUpper ? '4' : '6');
-      tooth.setAttribute('ry', isUpper ? '4' : '6');
-      tooth.setAttribute('fill', '#F5F0EB');
-      tooth.setAttribute('stroke', '#D4CFC9');
-      tooth.setAttribute('stroke-width', '1.5');
-      svg.appendChild(tooth);
-
-      const wire = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      const wireY = isUpper ? height * 0.55 : height * 0.45;
-      wire.setAttribute('x1', 0);
-      wire.setAttribute('y1', wireY);
-      wire.setAttribute('x2', width);
-      wire.setAttribute('y2', wireY);
-      wire.setAttribute('stroke', '#A0A0A0');
-      wire.setAttribute('stroke-width', '1.5');
-      svg.appendChild(wire);
-
-      const bw = Math.min(14, width * 0.5);
-      const bh = 10;
-      const bx = (width - bw) / 2;
-      const by = wireY - bh / 2;
-
-      const bracket = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-      bracket.setAttribute('x', bx);
-      bracket.setAttribute('y', by);
-      bracket.setAttribute('width', bw);
-      bracket.setAttribute('height', bh);
-      bracket.setAttribute('rx', '2');
-      bracket.setAttribute('ry', '2');
-      bracket.setAttribute('fill', defaultBracketColor);
-      bracket.setAttribute('stroke', '#888');
-      bracket.setAttribute('stroke-width', '0.75');
-      bracket.classList.add('cmb-bracket-dot');
-      bracket.dataset.toothId = id;
-      svg.appendChild(bracket);
-
-      svg.addEventListener('click', () => {
-        bracket.setAttribute('fill', selectedColor);
-      });
-
-      return svg;
+    // ── Color helpers ───────────────────────────────────────────────
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const mx = Math.max(r,g,b), mn = Math.min(r,g,b);
+      let h, s, l = (mx+mn)/2;
+      if (mx === mn) return [0, 0, l];
+      const d = mx - mn;
+      s = l > 0.5 ? d/(2-mx-mn) : d/(mx+mn);
+      switch(mx) {
+        case r: h = ((g-b)/d + (g<b?6:0))/6; break;
+        case g: h = ((b-r)/d + 2)/6; break;
+        case b: h = ((r-g)/d + 4)/6; break;
+      }
+      return [h*360, s, l];
+    }
+    function hslToRgb(h, s, l) {
+      h /= 360;
+      const hue2 = (p,q,t) => {
+        if(t<0) t+=1; if(t>1) t-=1;
+        if(t<1/6) return p+(q-p)*6*t;
+        if(t<1/2) return q;
+        if(t<2/3) return p+(q-p)*(2/3-t)*6;
+        return p;
+      };
+      if(s===0) { const v=Math.round(l*255); return [v,v,v]; }
+      const q = l<0.5 ? l*(1+s) : l+s-l*s, p = 2*l-q;
+      return [
+        Math.round(hue2(p,q,h+1/3)*255),
+        Math.round(hue2(p,q,h)    *255),
+        Math.round(hue2(p,q,h-1/3)*255),
+      ];
+    }
+    function hexToRgb(hex) {
+      return [parseInt(hex.slice(1,3),16), parseInt(hex.slice(3,5),16), parseInt(hex.slice(5,7),16)];
+    }
+    function isElastic(r, g, b) {
+      const [h, s, l] = rgbToHsl(r, g, b);
+      return h >= 170 && h <= 235 && s >= 0.22 && l >= 0.18 && l <= 0.80;
     }
 
-    const upperWidths = [26, 28, 32, 36, 40, 42, 42, 42, 42, 40, 36, 32, 28, 26];
-    const lowerWidths = [24, 26, 30, 34, 38, 40, 40, 40, 40, 38, 34, 30, 26, 24];
-    const toothHeight = 52;
+    // ── Canvas setup ────────────────────────────────────────────────
+    const wrap    = document.getElementById('cmbWrap');
+    const base    = document.getElementById('cmbBase');
+    const overlay = document.getElementById('cmbOverlay');
+    const bctx    = base.getContext('2d', { willReadFrequently: true });
+    const octx    = overlay.getContext('2d');
 
-    const upperArch = document.getElementById('upperArch');
-    const lowerArch = document.getElementById('lowerArch');
+    base.width = overlay.width = IMG_W;
+    base.height = overlay.height = IMG_H;
 
-    upperWidths.forEach((w, i) => {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'cmb-tooth';
-      wrapper.appendChild(createTooth('upper-' + i, w, toothHeight, true));
-      upperArch.appendChild(wrapper);
-    });
+    let origData = null;
+    let hoveredId = null;
 
-    lowerWidths.forEach((w, i) => {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'cmb-tooth';
-      wrapper.appendChild(createTooth('lower-' + i, w, toothHeight, false));
-      lowerArch.appendChild(wrapper);
-    });
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      bctx.drawImage(img, 0, 0, IMG_W, IMG_H);
+      origData = bctx.getImageData(0, 0, IMG_W, IMG_H);
+    };
+    img.src = '/assets/images/color-braces/Color_My_Braces_Image.jpg';
 
-    function getAllBrackets() {
-      return document.querySelectorAll('.cmb-bracket-dot');
-    }
-    function getUpperBrackets() {
-      return document.querySelectorAll('.cmb-bracket-dot[data-tooth-id^="upper"]');
-    }
-    function getLowerBrackets() {
-      return document.querySelectorAll('.cmb-bracket-dot[data-tooth-id^="lower"]');
-    }
+    // ── State ───────────────────────────────────────────────────────
+    const bracketColors = {};
+    let colorA = null;
+    let colorB = null;
+    let activeSlot = 'A';
 
-    document.getElementById('colorAll').addEventListener('click', () => {
-      getAllBrackets().forEach(b => b.setAttribute('fill', selectedColor));
-    });
+    // ── Render ──────────────────────────────────────────────────────
+    function redraw() {
+      if (!origData) return;
+      const result = new ImageData(new Uint8ClampedArray(origData.data), IMG_W, IMG_H);
+      const data = result.data;
+      const orig = origData.data;
 
-    document.getElementById('colorAllUpper').addEventListener('click', () => {
-      getUpperBrackets().forEach(b => b.setAttribute('fill', selectedColor));
-    });
-
-    document.getElementById('colorAllLower').addEventListener('click', () => {
-      getLowerBrackets().forEach(b => b.setAttribute('fill', selectedColor));
-    });
-
-    document.getElementById('alternateColors').addEventListener('click', () => {
-      const c2 = colors[Math.floor(Math.random() * colors.length)];
-      getAllBrackets().forEach((b, i) => {
-        b.setAttribute('fill', i % 2 === 0 ? selectedColor : c2);
+      BRACKETS.forEach(b => {
+        const hex = bracketColors[b.id];
+        if (!hex) return;
+        const [tr, tg, tb] = hexToRgb(hex);
+        const [th, ts] = rgbToHsl(tr, tg, tb);
+        const y1 = b.arch === 'upper' ? UPPER_Y1 : LOWER_Y1;
+        const y2 = b.arch === 'upper' ? UPPER_Y2 : LOWER_Y2;
+        for (let y = y1; y < y2; y++) {
+          for (let x = b.x1; x < b.x2; x++) {
+            const i = (y * IMG_W + x) * 4;
+            const or = orig[i], og = orig[i+1], ob = orig[i+2];
+            if (!isElastic(or, og, ob)) continue;
+            const [,, ol] = rgbToHsl(or, og, ob);
+            const [nr, ng, nb] = hslToRgb(th, ts * 0.9 + 0.05, ol);
+            data[i] = nr; data[i+1] = ng; data[i+2] = nb;
+          }
+        }
       });
+
+      bctx.putImageData(result, 0, 0);
+    }
+
+    function drawOverlay() {
+      octx.clearRect(0, 0, IMG_W, IMG_H);
+      if (!hoveredId) return;
+      const b = BRACKETS.find(b => b.id === hoveredId);
+      if (!b) return;
+      const y1 = b.arch === 'upper' ? UPPER_Y1 : LOWER_Y1;
+      const y2 = b.arch === 'upper' ? UPPER_Y2 : LOWER_Y2;
+      octx.fillStyle = 'rgba(255,255,255,0.28)';
+      octx.fillRect(b.x1, y1, b.x2 - b.x1, y2 - y1);
+      octx.strokeStyle = 'rgba(255,255,255,0.9)';
+      octx.lineWidth = 2;
+      octx.strokeRect(b.x1+1, y1+1, b.x2-b.x1-2, y2-y1-2);
+      const slot = activeSlot === 'A' ? colorA : colorB;
+      if (slot) {
+        const cx = (b.x1 + b.x2) / 2;
+        const cy = b.arch === 'upper' ? (UPPER_Y1+UPPER_Y2)/2 : (LOWER_Y1+LOWER_Y2)/2;
+        octx.beginPath();
+        octx.arc(cx, cy, 10, 0, Math.PI*2);
+        octx.fillStyle = slot.hex;
+        octx.fill();
+        octx.strokeStyle = 'rgba(255,255,255,0.8)';
+        octx.lineWidth = 2;
+        octx.stroke();
+      }
+    }
+
+    // ── Mouse events ────────────────────────────────────────────────
+    function pxFromEvent(e) {
+      const rect = wrap.getBoundingClientRect();
+      return {
+        x: (e.clientX - rect.left) * (IMG_W / rect.width),
+        y: (e.clientY - rect.top)  * (IMG_H / rect.height),
+      };
+    }
+    function bracketAt(cx, cy) {
+      return BRACKETS.find(b => {
+        const y1 = b.arch === 'upper' ? UPPER_Y1-10 : LOWER_Y1-5;
+        const y2 = b.arch === 'upper' ? UPPER_Y2+10 : LOWER_Y2+5;
+        return cx >= b.x1 && cx < b.x2 && cy >= y1 && cy < y2;
+      }) || null;
+    }
+
+    wrap.addEventListener('mousemove', e => {
+      const {x, y} = pxFromEvent(e);
+      const b = bracketAt(x, y);
+      const id = b ? b.id : null;
+      if (id !== hoveredId) { hoveredId = id; wrap.style.cursor = id ? 'pointer' : 'default'; drawOverlay(); }
+    });
+    wrap.addEventListener('mouseleave', () => {
+      hoveredId = null; wrap.style.cursor = 'default'; drawOverlay();
+    });
+    wrap.addEventListener('click', e => {
+      const {x, y} = pxFromEvent(e);
+      const b = bracketAt(x, y);
+      if (!b) return;
+      const color = activeSlot === 'A' ? colorA : colorB;
+      if (!color) { alert('Pick a color first!'); return; }
+      bracketColors[b.id] = color.hex;
+      redraw(); drawOverlay();
     });
 
-    document.getElementById('randomColors').addEventListener('click', () => {
-      getAllBrackets().forEach(b => {
-        b.setAttribute('fill', colors[Math.floor(Math.random() * colors.length)]);
+    // ── Global action functions (called from onclick) ───────────────
+    window.cmbSetSlot = function(slot) {
+      activeSlot = slot;
+      document.getElementById('slotA').classList.toggle('active', slot === 'A');
+      document.getElementById('slotB').classList.toggle('active', slot === 'B');
+      updateSwatchActive();
+    };
+
+    window.cmbFillArch = function(arch, slot) {
+      const color = slot === 'A' ? colorA : colorB;
+      if (!color) { alert('Set Color ' + slot + ' first'); return; }
+      const targets = arch === 'upper' ? UPPER : arch === 'lower' ? LOWER : BRACKETS;
+      targets.forEach(b => { bracketColors[b.id] = color.hex; });
+      redraw();
+    };
+
+    window.cmbAlternate = function(arch) {
+      if (!colorA || !colorB) { alert('Set both Color A and Color B first'); return; }
+      const list = arch === 'upper' ? UPPER : arch === 'lower' ? LOWER : BRACKETS;
+      list.forEach((b, i) => { bracketColors[b.id] = (i % 2 === 0 ? colorA : colorB).hex; });
+      redraw();
+    };
+
+    window.cmbReset = function() {
+      Object.keys(bracketColors).forEach(k => delete bracketColors[k]);
+      redraw();
+    };
+
+    // ── Palette ─────────────────────────────────────────────────────
+    const COLORS = [
+      { name:'Red',      hex:'#e53935' },
+      { name:'Orange',   hex:'#f57c00' },
+      { name:'Yellow',   hex:'#fdd835' },
+      { name:'Lime',     hex:'#8bc34a' },
+      { name:'Green',    hex:'#2e7d32' },
+      { name:'Teal',     hex:'#00897b' },
+      { name:'Aqua',     hex:'#00bcd4' },
+      { name:'Sky Blue', hex:'#039be5' },
+      { name:'Blue',     hex:'#1e88e5' },
+      { name:'Navy',     hex:'#283593' },
+      { name:'Lavender', hex:'#9575cd' },
+      { name:'Purple',   hex:'#7b1fa2' },
+      { name:'Pink',     hex:'#f06292' },
+      { name:'Hot Pink', hex:'#e91e63' },
+      { name:'Gold',     hex:'#f9a825' },
+      { name:'White',    hex:'#f0f0f0', light:true },
+      { name:'Silver',   hex:'#90a4ae', light:true },
+      { name:'Black',    hex:'#263238' },
+    ];
+
+    function updateSwatchActive() {
+      const current = activeSlot === 'A' ? colorA : colorB;
+      document.querySelectorAll('.cmb-swatch').forEach(sw => {
+        sw.classList.toggle('active', !!(current && sw.dataset.hex === current.hex));
       });
+    }
+
+    const paletteEl = document.getElementById('cmbPalette');
+    COLORS.forEach(c => {
+      const sw = document.createElement('div');
+      sw.className = 'cmb-swatch' + (c.light ? ' light' : '');
+      sw.style.background = c.hex;
+      sw.dataset.hex = c.hex;
+      sw.title = c.name;
+      sw.addEventListener('click', () => {
+        if (activeSlot === 'A') { colorA = c; document.getElementById('dotA').style.background = c.hex; }
+        else                    { colorB = c; document.getElementById('dotB').style.background = c.hex; }
+        updateSwatchActive();
+        drawOverlay();
+      });
+      paletteEl.appendChild(sw);
     });
 
-    document.getElementById('resetTeeth').addEventListener('click', () => {
-      getAllBrackets().forEach(b => b.setAttribute('fill', defaultBracketColor));
-    });
-  });
+  })();
   </script>
 </body>
 </html>
