@@ -28,6 +28,17 @@
       text-align: center;
       transition: all var(--transition-base);
     }
+    .staff-grid {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-xl);
+    }
+    .staff-grid .team-card {
+      width: calc(33.333% - var(--space-xl) * 2 / 3);
+      max-width: 340px;
+    }
     .team-card:hover {
       box-shadow: var(--shadow-lg);
       transform: translateY(-4px);
@@ -81,10 +92,12 @@
     }
     @media (max-width: 768px) {
       .team-grid { grid-template-columns: 1fr 1fr; }
+      .staff-grid .team-card { width: calc(50% - var(--space-xl) / 2); }
     }
     @media (max-width: 480px) {
       .team-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
       .team-lead { max-width: 100%; }
+      .staff-grid .team-card { width: 100%; }
     }
   </style>
 </head>
@@ -133,7 +146,6 @@
               <li><a href="/patients/brushing-flossing.html" class="dropdown__link">Brushing &amp; Flossing</a></li>
               <li><a href="/patients/for-all-ages.html" class="dropdown__link">For All Ages</a></li>
               <li><a href="/patients/appliances.html" class="dropdown__link">Types of Appliances</a></li>
-              <li><a href="/patients/color-my-braces.html" class="dropdown__link">Color My Braces</a></li>
             </ul>
           </li>
           <li class="main-nav__item">
@@ -178,12 +190,13 @@
           </div>
 
           <!-- Staff Cards -->
+          <div class="staff-grid">
           <div class="team-card fade-in">
             <div class="team-card__photo"><img src="/assets/images/team/Bre.jpg" alt="Bre" style="object-fit: cover;" loading="lazy"></div>
             <div class="team-card__info">
               <p class="team-card__name">Bre</p>
               <p class="team-card__role">Orthodontic Team</p>
-              <p class="team-card__bio">Bio coming soon.</p>
+              <p class="team-card__bio">Hi! I'm Bre. I am a certified Expanded Function Dental Assistant (EFDA) with seven years of experience in orthodontics. I love helping patients achieve confident, healthy smiles and I take pride in providing quality care.</p>
             </div>
           </div>
 
@@ -192,7 +205,7 @@
             <div class="team-card__info">
               <p class="team-card__name">Jessie</p>
               <p class="team-card__role">Orthodontic Team</p>
-              <p class="team-card__bio">Bio coming soon.</p>
+              <p class="team-card__bio">I'm an orthodontic assistant who loves helping people feel confident in their smiles. I enjoy the hands-on side of orthodontics and getting to see real transformations from start to finish — it's rewarding to be part of something that makes such a big difference in someone's life. Outside of work, I spend my time with family and like to fish or hit the golf course whenever I can. I bring a fun, positive energy to everything I do and love connecting with patients along the way.</p>
             </div>
           </div>
 
@@ -201,7 +214,7 @@
             <div class="team-card__info">
               <p class="team-card__name">Katie</p>
               <p class="team-card__role">Orthodontic Team</p>
-              <p class="team-card__bio">Bio coming soon.</p>
+              <p class="team-card__bio">My name is Kaitie, I am married to my husband, Nick and we have two wild and untamed little boys. I heavily enjoy working out at Iron Legion because when I am not at work you will find me actively earning my title as 'boy mom'. I am truly grateful to be working at Inline Orthodontics, specifically because I could not have handpicked such a perfect team of individuals to be around daily if I tried, but also it's such a gift to see the confidence shine when patients finally get to see the final results of their treatment, their SMILE! It truly never gets old.</p>
             </div>
           </div>
 
@@ -210,7 +223,7 @@
             <div class="team-card__info">
               <p class="team-card__name">Lupe</p>
               <p class="team-card__role">Orthodontic Team</p>
-              <p class="team-card__bio">Bio coming soon.</p>
+              <p class="team-card__bio">My name is Lupe. I am an Ocala native and I love embracing my free spirit by exploring all the beautiful things Florida has to offer. When I am not snuggling up with my two cats, you'll find me riding on the back of my boyfriend's Harley chasing our next adventure together. I love my job at Inline Orthodontics as I get to interact daily with all of our patients and making them feel like family throughout their time with us.</p>
             </div>
           </div>
 
@@ -219,8 +232,9 @@
             <div class="team-card__info">
               <p class="team-card__name">Naylene</p>
               <p class="team-card__role">Orthodontic Team</p>
-              <p class="team-card__bio">Bio coming soon.</p>
+              <p class="team-card__bio">Hey hey, I'm Naylene! Ocala raised, but forever a Cali girl at heart. When I'm off the clock, I'm either shopping or catching flights. My favorite part about Inline is getting to connect with our amazing patients and making sure Dr. Darley stays effortlessly chic with a touch of Gen Z energy!</p>
             </div>
+          </div>
           </div>
 
         </div>
