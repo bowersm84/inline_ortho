@@ -215,6 +215,10 @@
   .section__header {
     margin-bottom: var(--space-2xl);
   }
+
+  .office-downtown-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 
