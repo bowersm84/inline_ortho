@@ -235,15 +235,71 @@
           </div>
 
           <div class="hero__media">
-            <div class="hero__video-wrap">
-              <iframe 
-                src="https://www.youtube.com/embed/oE1dy8aPT9Q?rel=0&modestbranding=1" 
-                title="Welcome to inLine Orthodontics" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen
-                loading="lazy">
-              </iframe>
+            <div id="yt-facade" style="position:relative;
+              width:100%; padding-bottom:56.25%; height:0;
+              overflow:hidden; border-radius:12px;
+              background:#000; cursor:pointer;"
+              onclick="loadYouTube()">
+
+              <!-- Thumbnail loaded from YouTube (no cookies) -->
+              <img
+                src="https://img.youtube.com/vi/oE1dy8aPT9Q/maxresdefault.jpg"
+                alt="inLine Orthodontics - Play Video"
+                style="position:absolute; top:0; left:0; width:100%;
+                       height:100%; object-fit:cover; display:block;">
+
+              <!-- Play button overlay -->
+              <div style="position:absolute; top:50%; left:50%;
+                transform:translate(-50%,-50%);
+                width:72px; height:72px; background:rgba(255,0,0,0.85);
+                border-radius:50%; display:flex; align-items:center;
+                justify-content:center; transition: transform 0.2s ease;">
+                <svg width="28" height="28" viewBox="0 0 24 24"
+                     fill="white">
+                  <polygon points="5,3 19,12 5,21"/>
+                </svg>
+              </div>
+
+              <!-- Hover effect -->
+              <style>
+                #yt-facade:hover > div { transform: translate(-50%,-50%) scale(1.1); }
+              </style>
             </div>
+
+            <!-- YouTube iframe inserted here only after interaction -->
+            <div id="yt-player" style="display:none; position:relative;
+              width:100%; padding-bottom:56.25%; height:0;
+              overflow:hidden; border-radius:12px;"></div>
+
+            <script>
+              function loadYouTube() {
+                document.getElementById('yt-facade').style.display = 'none';
+                var player = document.getElementById('yt-player');
+                player.style.display = 'block';
+                player.innerHTML = '<iframe style="position:absolute;top:0;left:0;'
+                  + 'width:100%;height:100%;border:0;" '
+                  + 'src="https://www.youtube.com/embed/oE1dy8aPT9Q?autoplay=1" '
+                  + 'allowfullscreen allow="autoplay; encrypted-media" '
+                  + 'title="inLine Orthodontics Video"></iframe>';
+              }
+
+              // Also load automatically if user has already accepted cookies
+              if(localStorage.getItem('cookie_consent') === 'accepted') {
+                document.addEventListener('DOMContentLoaded', function() {
+                  var facade = document.getElementById('yt-facade');
+                  if(facade) {
+                    facade.style.display = 'none';
+                    var player = document.getElementById('yt-player');
+                    player.style.display = 'block';
+                    player.innerHTML = '<iframe style="position:absolute;top:0;left:0;'
+                      + 'width:100%;height:100%;border:0;" '
+                      + 'src="https://www.youtube.com/embed/oE1dy8aPT9Q" '
+                      + 'allowfullscreen allow="encrypted-media" '
+                      + 'title="inLine Orthodontics Video"></iframe>';
+                  }
+                });
+              }
+            </script>
           </div>
 
         </div>
