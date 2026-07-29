@@ -1,8 +1,3 @@
-# Maintenance mode — the exclusion rule MUST stay above the catch-all,
-# otherwise /maintenance.html redirects to itself in an infinite loop.
-/maintenance.html           /maintenance.html                   200
-/*                          /maintenance.html                   302
-
 # inLine Orthodontics — 301 Redirect Map
 # Old Sesame URLs → New Amplify URLs
 # Format: old-path new-path status-code
